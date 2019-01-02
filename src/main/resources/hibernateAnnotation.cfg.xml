@@ -20,6 +20,6 @@
 
 
         <!-- Mapping with model class containing annotations -->
-        <mapping class="company.Employee"/>
+        <mapping class="javaToDelete.company.Employee"/>
     </session-factory>
 </hibernate-configuration>

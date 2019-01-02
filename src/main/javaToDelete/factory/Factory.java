@@ -1,5 +1,6 @@
-package factory;
+package javaToDelete.factory;
 
+import javaToDelete.company.Employee;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -13,7 +14,7 @@ public class Factory {
 
         try {
             Configuration configuration = new Configuration();
-            configuration.addAnnotatedClass(company.Employee.class);//dlaczego bez tego nie dziala?
+            configuration.addAnnotatedClass(Employee.class);//dlaczego bez tego nie dziala?
             configuration.configure("hibernateAnnotation.cfg.xml");
 
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
