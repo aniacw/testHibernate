@@ -10,7 +10,7 @@ public class HibernateAnnotationMain {
 //        e.setSurname("White");
 //        e.setPaygrade("aaabb");
 //
-//        SessionFactory sessionFactory = Factory.getSessionAnnotationFactory();
+//        SessionFactory sessionFactory = Factory.getSessionFactory();
 //        Session session = sessionFactory.getCurrentSession();
 //
 //        session.beginTransaction();

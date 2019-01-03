@@ -1,25 +1,28 @@
 package javaToDelete.factory;
 
-import javaToDelete.company.Employee;
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 
 public class Factory {
 
-    private static SessionFactory sessionAnnotationFactory;
+    private static SessionFactory sessionFactory;
 
     private static SessionFactory buildSessionAnnotationFactory() {
-
         try {
-            Configuration configuration = new Configuration();
-            configuration.addAnnotatedClass(Employee.class);//dlaczego bez tego nie dziala?
-            configuration.configure("hibernateAnnotation.cfg.xml");
-
-            ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
-
-            SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+            StandardServiceRegistry ssr=new StandardServiceRegistryBuilder().configure("hibernateAnnotation.cfg.xml").build();
+            Metadata meta=new MetadataSources(ssr).getMetadataBuilder().build();
+            sessionFactory =meta.getSessionFactoryBuilder().build();
+            //sessionFactory =
+//            Configuration configuration = new Configuration();
+//            configuration.addAnnotatedClass(Employee.class);//dlaczego bez tego nie dziala?
+//            configuration.configure("hibernateAnnotation.cfg.xml");
+//
+//            ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+//
+//            SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 
             return sessionFactory;
         } catch (Throwable e) {
@@ -27,9 +30,9 @@ public class Factory {
         }
     }
 
-    public static SessionFactory getSessionAnnotationFactory() {
-        if(sessionAnnotationFactory == null)
-            sessionAnnotationFactory = buildSessionAnnotationFactory();
-        return sessionAnnotationFactory;
+    public static SessionFactory getSessionFactory() {
+        if(sessionFactory == null)
+            sessionFactory = buildSessionAnnotationFactory();
+        return sessionFactory;
     }
 }

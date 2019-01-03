@@ -2,18 +2,22 @@ package javaToDelete.company;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 
-@Entity
-@Table(name = "employees", uniqueConstraints = {@UniqueConstraint(columnNames = "id"),
-        @UniqueConstraint(columnNames = "surname")})
+//, uniqueConstraints = {@UniqueConstraint(columnNames = "id"),
+//        @UniqueConstraint(columnNames = "surname")}
+
 @NamedQueries(
-        {@NamedQuery(name = Employee.GET_EMAIL_BY_SURNAME, query = Employee.GET_EMAIL_BY_SURNAME_QUERY)}
+        {@NamedQuery(name = "GET_EMAIL_BY_SURNAME", query = "from Employee e where e.surname = :surname")}
 )
-public class Employee {
+@Entity
+@Table(name = "employees")
+public class Employee implements Serializable {
 
-    static final String GET_EMAIL_BY_SURNAME_QUERY = "from Employee e where e.surname = :surname";
+    public static final String GET_EMAIL_BY_SURNAME_QUERY = "from Employee e where e.surname = :surname";
     public static final String GET_EMAIL_BY_SURNAME = "GET_EMAIL_BY_SURNAME";
 
+    public Employee(){}
 
     @Column(name = "emp_name", length = 20, nullable = false)
     private String name;
@@ -30,8 +34,12 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "paygrade", length = 5)
-    private String paygrade;
+//    @Column(name = "paygrade", length = 5)
+//    private String paygrade;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="paygrade")
+    private Salary salary;
 
     public String getName() {
         return name;
@@ -65,13 +73,19 @@ public class Employee {
         this.id = id;
     }
 
-    public String getPaygrade() {
-        return paygrade;
+   // public String getPaygrade() {
+    //    return paygrade;
+    //}
+
+    //public void setPaygrade(String paygrade) {
+    //    this.paygrade = paygrade;
+    //}
+
+    public Salary getSalary() {
+        return salary;
     }
 
-    public void setPaygrade(String paygrade) {
-        this.paygrade = paygrade;
+    public void setSalary(Salary salary) {
+        this.salary = salary;
     }
-
-
 }

@@ -1129,7 +1129,7 @@
     </column>
     <column id="283" parent="278" name="paygrade">
       <Position>4</Position>
-      <DataType>varchar(5)|0s</DataType>
+      <DataType>char(5)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
@@ -1140,22 +1140,43 @@
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="285" parent="278" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="286" parent="279" name="paygrade">
-      <Position>1</Position>
+    <column id="285" parent="278" name="salary_paygrade">
+      <Position>6</Position>
       <DataType>varchar(5)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="287" parent="279" name="salary">
+    <index id="286" parent="278" name="FKoiwit1jb4strexp6i913ckiys">
+      <ColNames>paygrade</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="287" parent="278" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="288" parent="278" name="FKoiwit1jb4strexp6i913ckiys">
+      <ColNames>paygrade</ColNames>
+      <RefSchemaName>company_5</RefSchemaName>
+      <RefTableName>salary_mapping</RefTableName>
+      <RefColNames>paygrade</RefColNames>
+    </foreign-key>
+    <column id="289" parent="279" name="paygrade">
+      <Position>1</Position>
+      <DataType>char(5)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="290" parent="279" name="salary_value">
       <Position>2</Position>
       <DataType>double|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
+    <key id="291" parent="279" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>paygrade</ColNames>
+      <Primary>1</Primary>
+    </key>
   </database-model>
 </dataSource>

@@ -16,10 +16,11 @@
 
 
         <!-- DB schema will be updated if needed -->
-        <!-- <property name="hbm2ddl.auto">update</property> -->
+        <property name="hbm2ddl.auto">update</property>
 
 
         <!-- Mapping with model class containing annotations -->
         <mapping class="javaToDelete.company.Employee"/>
+        <mapping class="javaToDelete.company.Salary"/>
     </session-factory>
 </hibernate-configuration>
